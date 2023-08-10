@@ -1,42 +1,97 @@
-# Template for short-and-sweet lightning talks
+---
+marp: true
+title: Short and sweet intro to ArchUnit
+description: Short and sweet intro to ArchUnit
+theme: uncover
+paginate: true
+_paginate: false
 
-## Inspiration/background
+---
 
-* https://www.chessable.com/chess-openings/s/short%20sweet
-* https://en.wikipedia.org/wiki/Lightning_talk
+# Short and sweet
 
-## Why
+## Intro to ArchUnit
 
-**If** you want to 
+---
 
-* share a use-case/problem solution from your project
-* share experience with a technology/tool/framework
-* dive (deeper) into new topics
-* learn by doing
+# Intro, reason & background
 
-**then** a lightning talk is what you need!
+* Architecture/ coding convention compliance
+* at build time
+* will save you time and nerves during code review
 
-The goal of the short-and-sweet talk is not to provide an extensive teach-in experience - it's about knowledge sharing and inspiration to dive deeper later.
+<!--
+https://www.archunit.org/motivation
+-->
 
-## What
+---
 
-* slides (Markdown/AsciiDoc)
-  * you might want to use Marp (https://marpit.marp.app) in VSCode + Marp extension
-    * see also https://github.com/yhatt/marp-cli-example
-* code
-* script/helper snippers to speed up the demo
+# Example
 
+```
+@AnalyzeClasses(packages = "com.tngtech.archunit.example)
+public class InterfaceRulesTest {
 
-## When
+    @ArchTest
+    static final ArchRule interfaces_should_not_have_names_ending_with_the_word_interface =
+            noClasses().that().areInterfaces().should().haveNameMatching(".*Interface");
+}
+```
 
-TBD, most probably at lunch time aka 'Brown Bag Meeting' - simply announce and/or book the next available slot.
+---
 
-Overall duration should be around 15-30 mins to reserve enough time to come to the meat of the talk **and** to have 5-10 mins for Q&A
+# ArchUnit tests 
 
-## How
+## are JUnit tests
 
-* prepare the [What](##What)
-  * based on this template
-  * let https://github.com/OpenValue-D fork it
-* book the [When](##When)
-* and have fun
+---
+
+# ArchUnit tests
+
+## have presets
+
+see https://github.com/TNG/ArchUnit
+
+<!--
+
+https://github.com/TNG/ArchUnit/blob/main/archunit/src/main/java/com/tngtech/archunit/library/DependencyRules.java
+
+https://github.com/TNG/ArchUnit/blob/main/archunit/src/main/java/com/tngtech/archunit/library/Architectures.java
+
+-->
+
+---
+
+# ArchUnit tests
+
+## support DDD/ layered architecture
+
+```
+@Test
+void modulesDoNotHaveMutualDependencies() {
+    JavaClasses importedClasses = new ClassFileImporter()
+            .importPackages("my.company.project.service");
+
+    ArchRule rule = SlicesRuleDefinition.slices()
+            .matching("my.company.project.service.modules.(*)..")
+            .should().notDependOnEachOther();
+
+    rule.check(importedClasses);
+}
+```
+
+---
+
+# Demo (NDA, project)
+
+---
+
+# Links
+
+* https://www.archunit.org
+* https://github.com/TNG/ArchUnit-Examples/tree/main/example-junit5
+* https://www.morling.dev/blog/the-code-review-pyramid/
+
+---
+
+# Q&A
