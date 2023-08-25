@@ -1,11 +1,10 @@
 package de.openvalue.example.recipes.controller;
 
 import de.openvalue.example.recipes.Recipe;
-import de.openvalue.example.recipes.RecipesService;
+import de.openvalue.example.recipes.service.RecipesService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 

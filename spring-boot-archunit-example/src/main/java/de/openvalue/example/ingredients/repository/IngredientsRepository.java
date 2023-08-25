@@ -1,22 +1,28 @@
 package de.openvalue.example.ingredients.repository;
 
 import de.openvalue.example.ingredients.Ingredient;
-import de.openvalue.example.recipes.Recipe;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Repository
 public class IngredientsRepository {
 
     private final List<Ingredient> ingredients = new ArrayList();
 
+    public List<Ingredient> findBy(Optional<String> name) {
+        return ingredients.stream()
+                .filter(filterByName(name))
+                .collect(Collectors.toList());
+    }
 
-    public Optional<Ingredient> findByName(String name) {
-        return ingredients.stream().filter(ingredient -> ingredient.name().equals(name)).findFirst();
+    private static Predicate<Ingredient> filterByName(Optional<String> name) {
+        return ingredient -> name.map(n -> ingredient.name().toLowerCase().contains(n.toLowerCase())).orElse(true);
     }
 
     @PostConstruct

@@ -1,7 +1,7 @@
-package de.openvalue.example.recipes;
+package de.openvalue.example.recipes.service;
 
 import de.openvalue.example.ingredients.IngredientsService;
-import de.openvalue.example.ingredients.repository.IngredientsRepository;
+import de.openvalue.example.recipes.Recipe;
 import de.openvalue.example.recipes.repository.RecipeRepository;
 import org.springframework.stereotype.Service;
 

@@ -3,7 +3,6 @@ package de.openvalue.example.recipes.repository;
 import de.openvalue.example.recipes.Recipe;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;

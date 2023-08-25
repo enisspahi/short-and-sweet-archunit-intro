@@ -1,6 +1,5 @@
 package de.openvalue.example.recipes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public record Recipe(String title,
