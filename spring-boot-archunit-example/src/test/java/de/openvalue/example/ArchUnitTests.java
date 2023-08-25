@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
+import static com.tngtech.archunit.library.dependencies.SlicesRuleDefinition.slices;
 
 @AnalyzeClasses(packages = "de.openvalue.example", importOptions = ImportOption.DoNotIncludeTests.class)
 public class ArchUnitTests {
@@ -27,6 +28,7 @@ public class ArchUnitTests {
         rule.check(classes);
     }
 
+
     @ArchTest
     void ingredientsDomainInternalsAreIsolated(JavaClasses classes) {
         var rule = classes()
@@ -35,6 +37,15 @@ public class ArchUnitTests {
                 .should()
                 .onlyBeAccessed()
                 .byAnyPackage("..ingredients..");
+        rule.check(classes);
+    }
+
+    @ArchTest
+    void domainsShouldBeFreeOfCycles(JavaClasses classes) {
+        var rule = slices()
+                .matching("de.openvalue.example.(*)..")
+                .should()
+                .beFreeOfCycles();
         rule.check(classes);
     }
 
