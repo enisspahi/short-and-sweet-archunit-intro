@@ -1,6 +1,6 @@
 package de.openvalue.example.recipes.service;
 
-import de.openvalue.example.ingredients.IngredientsService;
+import de.openvalue.example.ingredients.IngredientsHealthService;
 import de.openvalue.example.recipes.Recipe;
 import de.openvalue.example.recipes.repository.RecipeRepository;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,11 @@ public class RecipesService {
 
     private final RecipeRepository recipeRepository;
 
-    private final IngredientsService ingredientsService;
+    private final IngredientsHealthService ingredientsHealthService;
 
-    public RecipesService(RecipeRepository recipeRepository, IngredientsService ingredientsService) {
+    public RecipesService(RecipeRepository recipeRepository, IngredientsHealthService ingredientsHealthService) {
         this.recipeRepository = recipeRepository;
-        this.ingredientsService = ingredientsService;
+        this.ingredientsHealthService = ingredientsHealthService;
 
     }
 
@@ -37,7 +37,7 @@ public class RecipesService {
             }
 
             var ingredientNames = recipe.ingredients().stream().map(Recipe.Ingredient::name).collect(Collectors.toList());
-            return ingredientsService.isHealthy(ingredientNames);
+            return ingredientsHealthService.isHealthy(ingredientNames);
         };
     }
 

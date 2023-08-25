@@ -1,7 +1,7 @@
 package de.openvalue.example.ingredients.service;
 
 import de.openvalue.example.ingredients.Ingredient;
-import de.openvalue.example.ingredients.IngredientsService;
+import de.openvalue.example.ingredients.IngredientsHealthService;
 import de.openvalue.example.ingredients.repository.IngredientsRepository;
 import org.springframework.stereotype.Service;
 
@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class IngredientsServiceImpl implements IngredientsService {
+public class IngredientsService implements IngredientsHealthService {
 
     private final IngredientsRepository ingredientsRepository;
 
-    public IngredientsServiceImpl(IngredientsRepository ingredientsRepository) {
+    public IngredientsService(IngredientsRepository ingredientsRepository) {
         this.ingredientsRepository = ingredientsRepository;
     }
 
