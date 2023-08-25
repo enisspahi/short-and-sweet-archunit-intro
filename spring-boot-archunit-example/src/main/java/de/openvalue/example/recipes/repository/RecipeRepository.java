@@ -45,7 +45,7 @@ public class RecipeRepository {
                 30, 20, 2,
                 List.of("1. Prepare ingredients", "2. Put it to the oven", "3. Serve")
         );
-        var proteinShake = new Recipe("Cake",
+        var proteinShake = new Recipe("Protein shake",
                 List.of(
                         new Recipe.Ingredient("Milk", 200.0, "milligrams"),
                         new Recipe.Ingredient("Protein powder", 1.0, "cup")
